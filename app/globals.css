@@ -1,26 +1,184 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f0f23;
+  --foreground: #00ff00;
+  --accent: #ff0080;
+  --secondary: #00ffff;
+  --warning: #ffff00;
+  --danger: #ff4444;
+  --muted: #333366;
+  --border: #00ff00;
+  --pixel-size: 2px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-retro: "Press Start 2P", monospace;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f0f0f0;
+    --foreground: #000080;
+    --accent: #ff0080;
+    --secondary: #008080;
+    --warning: #cc6600;
+    --danger: #cc0000;
+    --muted: #666666;
+    --border: #000080;
   }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-retro);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pixel-perfect {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.retro {
+  font-family: var(--font-retro);
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.pixel-border {
+  border: var(--pixel-size) solid var(--border);
+  border-image: 
+    repeating-linear-gradient(
+      45deg,
+      var(--border) 0px,
+      var(--border) var(--pixel-size),
+      transparent var(--pixel-size),
+      transparent calc(var(--pixel-size) * 2)
+    ) var(--pixel-size);
+}
+
+.pixel-shadow {
+  box-shadow: 
+    var(--pixel-size) var(--pixel-size) 0 var(--foreground),
+    calc(var(--pixel-size) * 2) calc(var(--pixel-size) * 2) 0 var(--muted);
+}
+
+.glow {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 255, 0, 0.1) 2px,
+      rgba(0, 255, 0, 0.1) 4px
+    );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes pixel-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes screen-flicker {
+  0%, 100% { opacity: 1; }
+  98%, 99% { opacity: 0.98; }
+}
+
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
+.animate-typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end);
+}
+
+.animate-pixel-bounce {
+  animation: pixel-bounce 2s infinite;
+}
+
+.animate-screen-flicker {
+  animation: screen-flicker 0.15s infinite linear;
+}
+
+.progress-bar {
+  background: var(--muted);
+  border: 2px solid var(--border);
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(255, 255, 255, 0.2) 2px,
+      rgba(255, 255, 255, 0.2) 4px
+    );
 }

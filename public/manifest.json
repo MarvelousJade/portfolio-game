@@ -1,0 +1,16 @@
+{
+  "name": "Game Developer Portfolio",
+  "short_name": "GameDev Portfolio",
+  "description": "Interactive 8-bit themed portfolio for a junior game developer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f23",
+  "theme_color": "#00ff00",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}
