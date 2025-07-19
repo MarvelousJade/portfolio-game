@@ -6,9 +6,9 @@ export default function HeroSection({ isActive }) {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
-  
+
   const fullText = "GAME DEVELOPER";
-  const subtitle = "Junior Developer | Unity & Unreal | Indie Game Creator";
+  const subtitle = "Junior Developer | Unreal & SDL2 | Indie Game Creator";
 
   useEffect(() => {
     if (!isActive) return;
@@ -47,51 +47,50 @@ export default function HeroSection({ isActive }) {
   );
 
   return (
-    <section 
-      id="hero" 
-      className={`min-h-screen flex items-center justify-center px-4 transition-all duration-500 ${
-        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+    <section
+      id="hero"
+      className={`min-h-screen flex items-center justify-center px-4 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
     >
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-8 flex justify-center">
           {pixelAvatar}
         </div>
-        
+
         <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 glow">
           <span className="text-accent">▸ </span>
           {displayText}
           <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>_</span>
         </h1>
-        
+
         <p className="text-sm sm:text-lg md:text-xl text-secondary mb-8 max-w-2xl mx-auto">
           {subtitle}
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button 
+          <button
             className="pixel-border bg-accent text-background px-6 py-3 hover:bg-secondary transition-colors pixel-shadow"
             onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
           >
             VIEW PROJECTS
           </button>
-          
-          <button 
-            className="pixel-border bg-transparent border-secondary text-secondary px-6 py-3 hover:bg-secondary hover:text-background transition-colors"
+
+          <button
+            className="pixel-border bg-transparent border-secondary text-secondary px-6 py-3 hover:bg-secondary hover:text-background transition-colors pixel-shadow"
             onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
           >
             GET IN TOUCH
           </button>
-          
-          <a 
-            href="/resume.pdf" 
+
+          <a
+            href="/resume.pdf"
             download
             className="pixel-border bg-warning text-background px-6 py-3 hover:bg-danger transition-colors pixel-shadow flex items-center gap-2"
           >
             📄 DOWNLOAD RESUME
           </a>
         </div>
-        
+
         <div className="mt-12 text-muted text-xs sm:text-sm">
           <p>▸ Use WASD or arrow keys to navigate</p>
           <p>▸ Press SPACE to interact</p>

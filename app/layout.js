@@ -12,20 +12,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Game Developer Portfolio | Your Name - Junior Unity & Unreal Developer",
+  title: "Game Developer Portfolio | Shaoyu Fan - Junior Unreal & SDL2 Developer",
   description: "Interactive 8-bit themed portfolio showcasing game development projects, skills in Unity & Unreal Engine, and passion for creating immersive gaming experiences. Available for junior developer positions.",
-  keywords: "game developer, Unity, Unreal Engine, C#, C++, indie games, portfolio, junior developer, game programming, 8-bit, retro games",
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
-  publisher: "Your Name",
+  keywords: "game developer, Unity, Unreal Engine, C++, indie games, portfolio, junior developer, game programming, 8-bit, retro games",
+  authors: [{ name: "Shaoyu Fan" }],
+  creator: "Shaoyu Fan",
+  publisher: "Shaoyu Fan",
   robots: "index, follow",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://yoursite.dev",
-    title: "Game Developer Portfolio | Your Name",
+    title: "Game Developer Portfolio | Shaoyu Fan",
     description: "Interactive 8-bit portfolio of a passionate junior game developer specializing in Unity & Unreal Engine development.",
-    siteName: "Your Name - Game Developer",
+    siteName: "Shaoyu Fan - Game Developer",
     images: [
       {
         url: "/og-image.png",

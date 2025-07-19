@@ -30,7 +30,7 @@ export default function ContactSection({ isActive }) {
       setIsSubmitting(false);
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-      
+
       setTimeout(() => {
         setSubmitStatus("");
       }, 3000);
@@ -40,54 +40,47 @@ export default function ContactSection({ isActive }) {
   const contactMethods = [
     {
       method: "Email",
-      value: "your.email@example.com",
+      value: "fanshaoyu9@outlook.com",
       icon: "📧",
-      action: "mailto:your.email@example.com"
+      action: "mailto:fanshaoyu9@outlook.com"
     },
     {
       method: "LinkedIn",
-      value: "/in/yourprofile",
+      value: "/in/shaoyu-fan-b061772a3",
       icon: "💼",
-      action: "https://linkedin.com/in/yourprofile"
+      action: "https://linkedin.com/in/shaoyu-fan-b061772a3"
     },
     {
       method: "GitHub",
-      value: "/yourusername",
+      value: "/MarvelousJade",
       icon: "💻",
-      action: "https://github.com/yourusername"
+      action: "https://github.com/MarvelousJade"
     },
     {
       method: "Discord",
-      value: "YourTag#1234",
+      value: ".fansy99",
       icon: "🎮",
       action: "#"
     },
-    {
-      method: "Twitter",
-      value: "@yourtag",
-      icon: "🐦",
-      action: "https://twitter.com/yourtag"
-    },
-    {
-      method: "Portfolio",
-      value: "yoursite.dev",
-      icon: "🌐",
-      action: "https://yoursite.dev"
-    }
+    // {
+    //   method: "Portfolio",
+    //   value: "yoursite.dev",
+    //   icon: "🌐",
+    //   action: "https://yoursite.dev"
+    // }
   ];
 
   return (
-    <section 
-      id="contact" 
-      className={`min-h-screen py-20 px-4 transition-all duration-500 ${
-        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+    <section
+      id="contact"
+      className={`min-h-screen py-20 px-4 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl sm:text-5xl font-bold text-center mb-4 glow">
           <span className="text-accent">▸ </span>COMMUNICATION PANEL
         </h2>
-        
+
         <p className="text-center text-secondary mb-12 text-sm sm:text-base">
           Initiate contact sequence • All transmissions encrypted
         </p>
@@ -98,13 +91,13 @@ export default function ContactSection({ isActive }) {
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
               📡 SEND MESSAGE
             </h3>
-            
+
             {submitStatus === "success" && (
               <div className="pixel-border bg-accent/20 p-4 mb-4 text-accent text-sm">
                 ✅ Message transmitted successfully! I&apos;ll respond within 24 hours.
               </div>
             )}
-            
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-bold text-secondary mb-2">
@@ -120,7 +113,7 @@ export default function ContactSection({ isActive }) {
                   placeholder="Enter your display name..."
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-bold text-secondary mb-2">
                   Email Protocol:
@@ -135,7 +128,7 @@ export default function ContactSection({ isActive }) {
                   placeholder="your@email.com"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-bold text-secondary mb-2">
                   Message Subject:
@@ -150,7 +143,7 @@ export default function ContactSection({ isActive }) {
                   placeholder="Job Opportunity / Collaboration / etc."
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-bold text-secondary mb-2">
                   Message Content:
@@ -165,15 +158,14 @@ export default function ContactSection({ isActive }) {
                   placeholder="Type your message here..."
                 />
               </div>
-              
+
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full pixel-border px-6 py-3 font-bold transition-all duration-300 pixel-shadow ${
-                  isSubmitting 
-                    ? 'bg-muted text-foreground cursor-not-allowed' 
-                    : 'bg-accent text-background hover:bg-secondary'
-                }`}
+                className={`w-full pixel-border px-6 py-3 font-bold transition-all duration-300 pixel-shadow ${isSubmitting
+                  ? 'bg-muted text-foreground cursor-not-allowed'
+                  : 'bg-accent text-background hover:bg-secondary'
+                  }`}
               >
                 {isSubmitting ? '🔄 TRANSMITTING...' : '📤 SEND MESSAGE'}
               </button>
@@ -187,7 +179,7 @@ export default function ContactSection({ isActive }) {
               <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
                 🔗 QUICK CONNECT
               </h3>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {contactMethods.map((contact, index) => (
                   <a
@@ -212,7 +204,7 @@ export default function ContactSection({ isActive }) {
               <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
                 📊 STATUS PANEL
               </h3>
-              
+
               <div className="space-y-3">
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-foreground">Availability:</span>
@@ -220,22 +212,22 @@ export default function ContactSection({ isActive }) {
                     🟢 ONLINE
                   </span>
                 </div>
-                
+
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-foreground">Response Time:</span>
                   <span className="text-secondary">&lt; 24 hours</span>
                 </div>
-                
+
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-foreground">Location:</span>
-                  <span className="text-foreground">Your City, Country</span>
+                  <span className="text-foreground">Toronto, Canada</span>
                 </div>
-                
+
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-foreground">Time Zone:</span>
-                  <span className="text-foreground">UTC-5 (EST)</span>
+                  <span className="text-foreground">UTC-4 (EST)</span>
                 </div>
-                
+
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-foreground">Preferred Contact:</span>
                   <span className="text-warning">Email</span>
@@ -248,7 +240,7 @@ export default function ContactSection({ isActive }) {
               <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
                 🤝 COLLABORATION
               </h3>
-              
+
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-accent">✅</span>
@@ -272,7 +264,7 @@ export default function ContactSection({ isActive }) {
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-muted">❌</span>
-                  <span className="text-muted">Unpaid internships</span>
+                  <span className="text-foreground">Unpaid internships</span>
                 </div>
               </div>
             </div>

@@ -14,18 +14,27 @@ export default function AudioControls() {
     if (typeof window !== 'undefined') {
       try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const audioContext = new AudioContext();
-        audioRef.current = audioContext;
+        if (AudioContext) {
+          const audioContext = new AudioContext();
+          audioRef.current = audioContext;
+        } else {
+          console.log('Web Audio API not supported in this browser');
+        }
       } catch (error) {
-        console.log('Web Audio API not supported');
+        console.log('Web Audio API initialization failed:', error);
       }
     }
   }, []);
 
-  const playBeep = useCallback((frequency = 440, duration = 100, type = 'square') => {
+  const playBeep = useCallback(async (frequency = 440, duration = 100, type = 'square') => {
     if (!audioRef.current) return;
 
     try {
+      // Resume audio context if suspended (required for autoplay policy)
+      if (audioRef.current.state === 'suspended') {
+        await audioRef.current.resume();
+      }
+
       const oscillator = audioRef.current.createOscillator();
       const gainNode = audioRef.current.createGain();
 
@@ -41,7 +50,7 @@ export default function AudioControls() {
       oscillator.start(audioRef.current.currentTime);
       oscillator.stop(audioRef.current.currentTime + duration / 1000);
     } catch (error) {
-      console.log('Audio playback failed');
+      console.log('Audio playback failed:', error);
     }
   }, [volume]);
 
@@ -75,9 +84,16 @@ export default function AudioControls() {
 
   // Add sound effects to button clicks globally
   useEffect(() => {
+    // Only add sound effects if audio is available
+    if (!audioRef.current) return;
+
     const addClickSounds = () => {
       const buttons = document.querySelectorAll('button, a[href]');
       buttons.forEach(button => {
+        // Remove existing listeners first to prevent duplicates
+        button.removeEventListener('mouseenter', playSelectSound);
+        button.removeEventListener('click', playConfirmSound);
+        // Add new listeners
         button.addEventListener('mouseenter', playSelectSound);
         button.addEventListener('click', playConfirmSound);
       });

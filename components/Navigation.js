@@ -6,6 +6,8 @@ export default function Navigation({ currentSection, setCurrentSection }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showHints, setShowHints] = useState(false);
+  const [menuOpenedByClick, setMenuOpenedByClick] = useState(false);
+  const [showHoverPreview, setShowHoverPreview] = useState(false);
 
   const navItems = useMemo(() => [
     { id: "hero", label: "HOME", icon: "🏠" },
@@ -18,48 +20,49 @@ export default function Navigation({ currentSection, setCurrentSection }) {
   const handleNavClick = useCallback((sectionId) => {
     setCurrentSection(sectionId);
     setIsMenuOpen(false);
-    document.getElementById(sectionId)?.scrollIntoView({ 
+    setMenuOpenedByClick(false);
+    document.getElementById(sectionId)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
   }, [setCurrentSection]);
 
-  // Auto-hide menu after inactivity
-  useEffect(() => {
-    let timeout;
-    if (isMenuOpen && !isHovered) {
-      timeout = setTimeout(() => {
-        setIsMenuOpen(false);
-      }, 3000);
-    }
-    return () => clearTimeout(timeout);
-  }, [isMenuOpen, isHovered]);
+  const handleMenuToggle = useCallback(() => {
+    setIsMenuOpen(!isMenuOpen);
+    setMenuOpenedByClick(!isMenuOpen); // Track if menu was opened by click
+  }, [isMenuOpen]);
+
+  // No auto-hide timer needed - hover behavior is handled in onMouseLeave
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e) => {
       const currentIndex = navItems.findIndex(item => item.id === currentSection);
-      
+
       switch (e.key.toLowerCase()) {
         case 'arrowup':
         case 'w':
+        case 'arrowleft':
+        case 'a':
           e.preventDefault();
           const prevIndex = currentIndex > 0 ? currentIndex - 1 : navItems.length - 1;
           handleNavClick(navItems[prevIndex].id);
           break;
-          
+
         case 'arrowdown':
         case 's':
+        case 'arrowright':
+        case 'd':
           e.preventDefault();
           const nextIndex = currentIndex < navItems.length - 1 ? currentIndex + 1 : 0;
           handleNavClick(navItems[nextIndex].id);
           break;
-          
+
         case 'escape':
           e.preventDefault();
-          setIsMenuOpen(!isMenuOpen);
+          handleMenuToggle();
           break;
-          
+
         case ' ':
         case 'enter':
           e.preventDefault();
@@ -70,7 +73,7 @@ export default function Navigation({ currentSection, setCurrentSection }) {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentSection, handleNavClick, navItems, isMenuOpen]);
+  }, [currentSection, handleNavClick, navItems, handleMenuToggle]);
 
   // Scroll spy functionality
   useEffect(() => {
@@ -101,14 +104,19 @@ export default function Navigation({ currentSection, setCurrentSection }) {
     <>
       {/* Compact Desktop Navigation - Collapsible */}
       <nav className="fixed top-4 left-4 z-40 hidden md:block">
-        <div 
-          className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="relative">
           {/* Menu Toggle Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={handleMenuToggle}
+            onMouseEnter={() => {
+              // Only show hover preview if menu isn't already open by click
+              if (!menuOpenedByClick && !isMenuOpen) {
+                setShowHoverPreview(true);
+              }
+            }}
+            onMouseLeave={() => {
+              setShowHoverPreview(false);
+            }}
             className="pixel-border w-10 h-10 flex items-center justify-center bg-muted/90 backdrop-blur-sm pixel-shadow hover:bg-accent/20 transition-all duration-200"
             title="Navigation Menu (ESC)"
           >
@@ -118,18 +126,17 @@ export default function Navigation({ currentSection, setCurrentSection }) {
           </button>
 
           {/* Expandable Menu */}
-          {(isMenuOpen || isHovered) && (
+          {(isMenuOpen || showHoverPreview) && (
             <div className="absolute top-full left-0 mt-2 pixel-border bg-muted/95 backdrop-blur-sm pixel-shadow min-w-48 animate-pixel-bounce">
               <div className="p-2 space-y-1">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => handleNavClick(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm transition-all duration-200 pixel-border ${
-                      currentSection === item.id
-                        ? 'bg-accent text-background pixel-shadow'
-                        : 'bg-transparent text-foreground hover:bg-accent/20'
-                    }`}
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-sm transition-all duration-200 pixel-border ${currentSection === item.id
+                      ? 'bg-accent text-background pixel-shadow'
+                      : 'bg-transparent text-foreground hover:bg-accent/20'
+                      }`}
                   >
                     <span className="text-base">{item.icon}</span>
                     <span className="font-bold">{item.label}</span>
@@ -149,11 +156,10 @@ export default function Navigation({ currentSection, setCurrentSection }) {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex flex-col items-center gap-1 px-1 py-2 text-xs transition-all duration-200 flex-1 ${
-                  currentSection === item.id
-                    ? 'text-accent'
-                    : 'text-foreground hover:text-accent'
-                }`}
+                className={`flex flex-col items-center gap-1 px-1 py-2 text-xs transition-all duration-200 flex-1 ${currentSection === item.id
+                  ? 'text-accent'
+                  : 'text-foreground hover:text-accent'
+                  }`}
               >
                 <span className="text-base">{item.icon}</span>
                 <span className="font-bold text-xs">{item.label}</span>
@@ -170,11 +176,10 @@ export default function Navigation({ currentSection, setCurrentSection }) {
             {navItems.map((item, index) => (
               <div
                 key={item.id}
-                className={`w-2 h-2 pixel-border transition-all duration-300 ${
-                  navItems.findIndex(nav => nav.id === currentSection) >= index
-                    ? 'bg-accent'
-                    : 'bg-muted'
-                }`}
+                className={`w-2 h-2 pixel-border transition-all duration-300 ${navItems.findIndex(nav => nav.id === currentSection) >= index
+                  ? 'bg-accent'
+                  : 'bg-muted'
+                  }`}
                 title={item.label}
               />
             ))}
@@ -186,19 +191,19 @@ export default function Navigation({ currentSection, setCurrentSection }) {
       </div>
 
       {/* Keyboard Hints - Toggle */}
-      <button
-        onClick={() => setShowHints(!showHints)}
-        className="fixed bottom-4 right-4 z-40 pixel-border w-10 h-10 flex items-center justify-center bg-muted/90 backdrop-blur-sm pixel-shadow hover:bg-accent/20 transition-all duration-200 hidden lg:block"
-        title="Keyboard Shortcuts"
-      >
-        <span className="text-sm">⌨️</span>
-      </button>
+      {/* <button */}
+      {/*   onClick={() => setShowHints(!showHints)} */}
+      {/*   className="fixed bottom-4 right-4 z-40 pixel-border w-10 h-10 flex items-center justify-center bg-muted/90 backdrop-blur-sm pixel-shadow hover:bg-accent/20 transition-all duration-200 hidden lg:block" */}
+      {/*   title="Keyboard Shortcuts" */}
+      {/* > */}
+      {/*   <span className="text-sm">⌨️</span> */}
+      {/* </button> */}
 
       {showHints && (
         <div className="fixed bottom-16 right-4 z-40 pixel-border bg-background/95 backdrop-blur-sm p-3 pixel-shadow animate-pixel-bounce">
           <div className="text-xs text-accent font-bold mb-2">KEYBOARD SHORTCUTS</div>
           <div className="space-y-1 text-xs text-foreground">
-            <div>W/S or ↑/↓ - Navigate sections</div>
+            <div>WASD or Arrow Keys - Navigate</div>
             <div>ESC - Toggle menu</div>
             <div>Space - Interact</div>
           </div>

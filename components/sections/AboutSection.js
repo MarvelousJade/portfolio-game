@@ -3,7 +3,7 @@
 export default function AboutSection({ isActive }) {
   const characterStats = [
     { stat: "Level", value: "Junior Dev", max: 100 },
-    { stat: "Experience", value: "2 Years", max: 100 },
+    // { stat: "Experience", value: "2 Years", max: 100 },
     { stat: "Creativity", value: 95, max: 100 },
     { stat: "Problem Solving", value: 88, max: 100 },
     { stat: "Team Work", value: 92, max: 100 },
@@ -13,23 +13,21 @@ export default function AboutSection({ isActive }) {
   ];
 
   const achievements = [
-    "🏆 First Game Published",
-    "🎯 100+ Hours of Unity",
-    "🔥 Jam Winner 2023",
+    // "🏆 First Game Published",
+    "🎯 100+ Hours of Unreal",
+    // "🔥 Jam Winner 2023",
     "⚡ Performance Optimizer",
-    "🎨 Pixel Art Creator",
+    // "🎨 Pixel Art Creator",
     "🧠 AI Implementation",
-    "🌐 Multiplayer Expert",
-    "📱 Mobile Port Master"
+    // "🌐 Multiplayer Expert",
+    // "📱 Mobile Port Master"
   ];
 
   const equipment = [
-    { name: "Primary IDE", item: "Visual Studio", rarity: "Epic" },
-    { name: "Game Engine", item: "Unity 2023.3", rarity: "Legendary" },
-    { name: "Graphics Tool", item: "Aseprite", rarity: "Rare" },
-    { name: "Version Control", item: "Git & GitHub", rarity: "Common" },
-    { name: "3D Modeling", item: "Blender", rarity: "Uncommon" },
-    { name: "Audio Tool", item: "Audacity", rarity: "Common" }
+    { name: "Primary Editor", item: "Neovim", rarity: "Epic" },
+    { name: "Game Engine", item: "Unreal", rarity: "Rare" },
+    { name: "Version Control", item: "Git & GitHub", rarity: "Legendary" },
+    { name: "Audio Tool", item: "Reaper", rarity: "Uncommon" }
   ];
 
   const getRarityColor = (rarity) => {
@@ -44,17 +42,16 @@ export default function AboutSection({ isActive }) {
   };
 
   return (
-    <section 
-      id="about" 
-      className={`min-h-screen py-20 px-4 transition-all duration-500 ${
-        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+    <section
+      id="about"
+      className={`min-h-screen py-20 px-4 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl sm:text-5xl font-bold text-center mb-4 glow">
           <span className="text-accent">▸ </span>CHARACTER STATS
         </h2>
-        
+
         <p className="text-center text-secondary mb-12 text-sm sm:text-base">
           View player information and current loadout
         </p>
@@ -65,7 +62,7 @@ export default function AboutSection({ isActive }) {
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
               📊 PLAYER STATS
             </h3>
-            
+
             <div className="space-y-3">
               {characterStats.map((stat, index) => (
                 <div key={index}>
@@ -77,8 +74,8 @@ export default function AboutSection({ isActive }) {
                   </div>
                   {typeof stat.value === 'number' && (
                     <div className="progress-bar">
-                      <div 
-                        className="progress-fill" 
+                      <div
+                        className="progress-fill"
                         style={{ width: `${(stat.value / stat.max) * 100}%` }}
                       ></div>
                     </div>
@@ -93,23 +90,23 @@ export default function AboutSection({ isActive }) {
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
               📖 PLAYER BIO
             </h3>
-            
+
             <div className="space-y-4 text-sm">
               <p className="text-foreground leading-relaxed">
-                Passionate junior game developer with a love for creating immersive experiences. 
-                Started coding at age 16 and fell in love with game development after creating 
+                Passionate junior game developer with a love for creating immersive experiences.
+                Started coding at age 16 and fell in love with game development after creating
                 my first platformer in Unity.
               </p>
-              
+
               <p className="text-foreground leading-relaxed">
-                Specializes in 2D/3D game mechanics, performance optimization, and creating 
-                engaging gameplay loops. Always eager to learn new technologies and collaborate 
+                Specializes in 2D game mechanics, performance optimization, and creating
+                engaging gameplay loops. Always eager to learn new technologies and collaborate
                 with fellow developers.
               </p>
-              
+
               <p className="text-foreground leading-relaxed">
-                When not coding, I enjoy playing indie games, creating pixel art, and 
-                participating in game jams to challenge my creativity and technical skills.
+                When not coding, I enjoy playing indie games, making music, and
+                learning new technologies to challenge my creativity and technical skills.
               </p>
             </div>
           </div>
@@ -119,7 +116,7 @@ export default function AboutSection({ isActive }) {
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
               🏅 ACHIEVEMENTS
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-2">
               {achievements.map((achievement, index) => (
                 <div
@@ -137,7 +134,7 @@ export default function AboutSection({ isActive }) {
             <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
               ⚔️ EQUIPMENT
             </h3>
-            
+
             <div className="space-y-2">
               {equipment.map((item, index) => (
                 <div
@@ -164,7 +161,7 @@ export default function AboutSection({ isActive }) {
           <h3 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
             📜 CURRENT QUESTS
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="pixel-border bg-background p-4">
               <div className="text-warning mb-2">🎯 MAIN QUEST</div>
@@ -173,15 +170,15 @@ export default function AboutSection({ isActive }) {
               </div>
               <div className="text-xs text-muted mt-1">In Progress...</div>
             </div>
-            
+
             <div className="pixel-border bg-background p-4">
               <div className="text-secondary mb-2">⭐ SIDE QUEST</div>
               <div className="text-sm text-foreground">
                 Complete 3D Game Project
               </div>
-              <div className="text-xs text-muted mt-1">75% Complete</div>
+              <div className="text-xs text-muted mt-1">45% Complete</div>
             </div>
-            
+
             <div className="pixel-border bg-background p-4">
               <div className="text-accent mb-2">🔄 DAILY QUEST</div>
               <div className="text-sm text-foreground">
