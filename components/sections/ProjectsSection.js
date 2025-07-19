@@ -10,7 +10,7 @@ export default function ProjectsSection({ isActive }) {
     {
       id: 1,
       title: "Hollow Knight Boss Fight ",
-      description: "A 2D platformer game with challenging gameplay mechanics.",
+      description: "A 2D action game featuring fluid combat mechanics, advanced AI behavior, and polished game feel elements.",
       tech: ["SDL2", "C++"],
       image: "/hollow-knight.png",
       playLink: "#",
@@ -21,7 +21,7 @@ export default function ProjectsSection({ isActive }) {
     {
       id: 2,
       title: "Chicken Defense",
-      description: "A fast-paced arcade shooter where you defend your base from waves of invading chickens.",
+      description: "A arcade shooter where you defend your base from waves of invading chickens.",
       tech: ["SDL2", "C++"],
       image: "🐔",
       playLink: "https://marvelousjade.itch.io/chicken-defense",
