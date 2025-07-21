@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import GameVideo from "../ui/GameVideo";
 
 export default function ProjectsSection({ isActive }) {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -13,6 +14,7 @@ export default function ProjectsSection({ isActive }) {
       description: "A 2D action game featuring fluid combat mechanics, advanced AI behavior, and polished game feel elements.",
       tech: ["SDL2", "C++"],
       image: "/hollow-knight.png",
+      video: "/videos/hollow-knight-demo.mp4", // Add your video file here
       playLink: "#",
       codeLink: "https://github.com/MarvelousJade/hollow-zero",
       status: "Released",
@@ -24,6 +26,7 @@ export default function ProjectsSection({ isActive }) {
       description: "A arcade shooter where you defend your base from waves of invading chickens.",
       tech: ["SDL2", "C++"],
       image: "🐔",
+      video: "/videos/chicken-defense-demo.mp4", // Add your video file here
       playLink: "https://marvelousjade.itch.io/chicken-defense",
       codeLink: "https://github.com/MarvelousJade/chicken-defense-game",
       status: "Released",
@@ -213,6 +216,21 @@ export default function ProjectsSection({ isActive }) {
                 <p className="text-foreground mb-6">
                   {selectedProject.description}
                 </p>
+
+                {/* Video Demo */}
+                {selectedProject.video && (
+                  <div className="mb-6">
+                    <h4 className="text-lg font-bold text-secondary mb-2">Gameplay Demo:</h4>
+                    <GameVideo
+                      src={selectedProject.video}
+                      poster={selectedProject.image.startsWith('/') ? selectedProject.image : undefined}
+                      title={`${selectedProject.title} Gameplay`}
+                      className="mb-4"
+                      controls={true}
+                      muted={true}
+                    />
+                  </div>
+                )}
 
                 <div className="mb-6">
                   <h4 className="text-lg font-bold text-secondary mb-2">Tech Stack:</h4>
