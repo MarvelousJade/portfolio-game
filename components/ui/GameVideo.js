@@ -70,7 +70,7 @@ export default function GameVideo({
       >
         <source src={src} type="video/mp4" />
         <source src={src.replace('.mp4', '.webm')} type="video/webm" />
-        Your browser doesn't support video playback.
+        Your browser doesn&apos;t support video playback.
       </video>
 
       {/* Custom play button overlay (only if controls are disabled) */}
