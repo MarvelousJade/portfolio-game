@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function GameVideo({ 
   src, 
@@ -43,6 +43,17 @@ export default function GameVideo({
       }
     }
   };
+
+  // Cleanup video only when component unmounts
+  useEffect(() => {
+    const video = videoRef.current;
+    return () => {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    };
+  }, []);
 
   return (
     <div className={`relative ${pixelBorder ? 'pixel-border' : ''} ${className}`}>

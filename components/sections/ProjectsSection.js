@@ -222,6 +222,7 @@ export default function ProjectsSection({ isActive }) {
                   <div className="mb-6">
                     <h4 className="text-lg font-bold text-secondary mb-2">Gameplay Demo:</h4>
                     <GameVideo
+                      key={selectedProject.id}
                       src={selectedProject.video}
                       poster={selectedProject.image.startsWith('/') ? selectedProject.image : undefined}
                       title={`${selectedProject.title} Gameplay`}
