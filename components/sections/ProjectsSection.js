@@ -35,9 +35,10 @@ export default function ProjectsSection({ isActive }) {
     {
       id: 3,
       title: "Souls-like",
-      description: "Dark Souls",
+      description: "A challenging action RPG inspired by Dark Souls, featuring precise combat mechanics, stamina management, and immersive world design built in Unreal Engine.",
       tech: ["Unreal", "C++"],
       image: "⚔️",
+      video: "/videos/Soulslike-demo.mp4",
       playLink: "#",
       codeLink: "#",
       status: "In Development",
