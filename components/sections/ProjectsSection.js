@@ -15,7 +15,7 @@ export default function ProjectsSection({ isActive }) {
       tech: ["SDL2", "C++"],
       image: "/hollow-knight.png",
       video: "/videos/hollow-knight-demo.mp4", // Add your video file here
-      playLink: "#",
+      playLink: "https://marvelousjade.itch.io/hollow-zero",
       codeLink: "https://github.com/MarvelousJade/hollow-zero",
       status: "Released",
       players: "Single Player"
