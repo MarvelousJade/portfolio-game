@@ -17,7 +17,7 @@ export default function ProjectsSection({ isActive }) {
       video: "/videos/hollow-knight-demo.mp4", // Add your video file here
       playLink: "https://marvelousjade.itch.io/hollow-zero",
       codeLink: "https://github.com/MarvelousJade/hollow-zero",
-      status: "Released",
+      status: "Demo",
       players: "Single Player"
     },
     {
@@ -29,7 +29,7 @@ export default function ProjectsSection({ isActive }) {
       video: "/videos/chicken-defense-demo.mp4", // Add your video file here
       playLink: "https://marvelousjade.itch.io/chicken-defense",
       codeLink: "https://github.com/MarvelousJade/chicken-defense-game",
-      status: "Released",
+      status: "Demo",
       players: "Single Player"
     },
     {
@@ -41,8 +41,19 @@ export default function ProjectsSection({ isActive }) {
       video: "/videos/Soulslike-demo.mp4",
       playLink: "#",
       codeLink: "#",
-      status: "In Development",
+      status: "Demo",
       players: "Single Player"
+    },
+    {
+      id: 4,
+      title: "Grim Rail Demo",
+      description: "A technical demonstration of advanced Unreal Engine 5.6 gameplay systems designed for narrative-driven horror, featuring quest tracking, environmental puzzles, and interaction mechanics.",
+      tech: ["Unreal", "C++", "Blueprint"],
+      image: "🚂",
+      video: "/videos/grim-rail-demo.mp4",
+      playLink: null,
+      codeLink: "https://github.com/MarvelousJade/GrimRailDemo",
+      status: "Demo"
     },
     // {
     //   id: 4,
@@ -174,9 +185,11 @@ export default function ProjectsSection({ isActive }) {
                 <span className={`${getStatusColor(project.status)}`}>
                   ● {project.status}
                 </span>
-                <span className="text-muted">
-                  {project.players}
-                </span>
+                {project.players && (
+                  <span className="text-muted">
+                    {project.players}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -203,9 +216,11 @@ export default function ProjectsSection({ isActive }) {
                   <div className={`text-sm ${getStatusColor(selectedProject.status)} mb-2`}>
                     ● {selectedProject.status}
                   </div>
-                  <div className="text-sm text-muted">
-                    {selectedProject.players}
-                  </div>
+                  {selectedProject.players && (
+                    <div className="text-sm text-muted">
+                      {selectedProject.players}
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -249,12 +264,14 @@ export default function ProjectsSection({ isActive }) {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href={selectedProject.playLink}
-                    className="pixel-border bg-accent text-background px-6 py-3 text-center hover:bg-secondary transition-colors pixel-shadow"
-                  >
-                    🎮 PLAY GAME
-                  </a>
+                  {selectedProject.playLink && (
+                    <a
+                      href={selectedProject.playLink}
+                      className="pixel-border bg-accent text-background px-6 py-3 text-center hover:bg-secondary transition-colors pixel-shadow"
+                    >
+                      🎮 PLAY GAME
+                    </a>
+                  )}
                   <a
                     href={selectedProject.codeLink}
                     className="pixel-border bg-transparent border-secondary text-secondary px-6 py-3 text-center hover:bg-secondary hover:text-background transition-colors pixel-shadow"
